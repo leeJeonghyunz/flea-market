@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      a {
+        color: blue;
+        text-decoration: none;
+      }
+    </style>
+    <script>
+      // 서버로부터 fakeUser 데이터를 가져와서 HTML에 표시
+      fetch("/api/user")
+        .then((response) => response.json())
+        .then((data) => {
+          const userInfoDiv = document.getElementById("user-info");
+          userInfoDiv.innerHTML = `<p>이름: ${data.이름}</p><p>국가: ${data.국가}</p>`;
+        })
+        .catch((error) => (userInfoDiv.innerHTML = `<p>NO DATA</p>`));
+
+      fetch("/api/product")
+        .then((response) => response.json())
+        .then((data) => {
+          const productInfo = document.getElementById("product-info");
+          productInfo.innerHTML = ""; // 기존 내용을 초기화합니다.
+          if (data.length === 0) {
+            productInfo.innerHTML = `<p>NO DATA</p>`;
+          } else {
+            data.forEach((product) => {
+              productInfo.innerHTML += `<div><a href="/product/${product.id}" onClick="clickId(${product.id})">${product.상품명}</a></div>`;
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      const clickId = (id) => {
+        console.log(id);
+      };
+    </script>
+  </head>
+  <body>
+    <div>
+      <a href="/login">Login</a>
+      <a href="/join">Join</a>
+      <div id="user-info"></div>
+      <div id="product-info"></div>
+    </div>
+  </body>
+</html>
