@@ -13,17 +13,22 @@ const fakeUser = {
   국가: "북한",
 };
 
-const productData = [
+export const productData = [
   {
-    상품명: "시계",
-    설명: "비싼 롤렉스",
-    가격: "300만원",
+    name: "시계",
+    description: "비싼 롤렉스",
+    price: "3000000",
+    location: "서울",
+    time: 1718602360718,
     id: 1,
+    img: "http://localhost:3000/",
   },
   {
-    상품명: "반지",
-    설명: "커플링",
-    가격: "30만원",
+    name: "반지",
+    description: "커플링",
+    price: "300000",
+    location: "서울",
+    time: 1718302660718,
     id: 2,
   },
 ];

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon --exec babel-node src/server.js",
+    "client": "npm start --prefix client/my-app"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,10 @@
   "homepage": "https://github.com/leeJeonghyunz/flea-market#readme",
   "dependencies": {
     "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
+    "mongoose": "^8.4.1",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

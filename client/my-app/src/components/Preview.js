@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { listIdState } from "../atoms";
+import { MAIN_COLOR, timeFormat } from "../config";
 
 const Wrapper = styled.div`
   border-bottom: 1px solid black;
@@ -30,6 +33,8 @@ const Img = styled.img`
 
 const Name = styled.h3`
   font-size: 20px;
+  color: ${MAIN_COLOR};
+  font-weight: 600;
 `;
 
 const Info = styled.div`
@@ -41,21 +46,30 @@ const Info = styled.div`
 
 const Time = styled.span``;
 
-export const Preview = ({ list }) => {
+const InfoDiv = styled.div`
+  line-height: 1.5rem;
+`;
+
+export const Preview = ({ item }) => {
+  const setListId = useSetRecoilState(listIdState);
+  const onClickList = (id) => {
+    setListId(id);
+  };
+  console.log(item.time);
   return (
-    <Link to={`/${list.id}`} style={{ textDecoration: "none" }}>
-      <Wrapper>
+    <Link to={`/product/${item.id}`} style={{ textDecoration: "none" }}>
+      <Wrapper onClick={() => onClickList(item.id)}>
         <WrapperLeft>
-          <Img src={list.img} alt="img" />
+          <Img src={item.img} alt="img" />
         </WrapperLeft>
         <WrapperRight>
-          <Name>{list.name}</Name>
+          <Name>{item.name}</Name>
           <Info>
-            <div>
-              <p>{list.location}</p>
-              <p>{list.price}원</p>
-            </div>
-            <Time>1분전</Time>
+            <InfoDiv>
+              <p>{item.location}</p>
+              <p>{Number(item.price).toLocaleString("ko-KR")}원</p>
+            </InfoDiv>
+            <Time>{timeFormat(item.time)}</Time>
           </Info>
         </WrapperRight>
       </Wrapper>

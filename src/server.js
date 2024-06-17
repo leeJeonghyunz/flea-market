@@ -1,8 +1,12 @@
+import "./db.js";
+
 import express from "express";
 import morgan from "morgan";
+import cors from "cors";
+
 import { globalRouter } from "./routers/globalRouter";
-import { userRouter } from "./routers/userRouter";
 import { productRouter } from "./routers/productRouter";
+
 const app = express();
 const PORT = 3000;
 
@@ -11,6 +15,10 @@ const handleListen = () => {
 };
 
 app.use(morgan("dev"));
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(globalRouter);
 app.use("/product", productRouter);
 

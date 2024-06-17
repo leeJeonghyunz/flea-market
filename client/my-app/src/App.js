@@ -1,11 +1,12 @@
+import Header from "./components/Header";
 import styled from "styled-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Write } from "./Routes/write";
 import { Home } from "./Routes/home";
-import { Login } from "./Routes/login";
-import Header from "./components/Header";
-import { Detail } from "./Routes/detatil";
-import { Join } from "./Routes/join";
+import { Login } from "./Routes/user/login";
+import { Join } from "./Routes/user/join";
+import { Detail } from "./Routes/product/detatil";
+import { Edit } from "./Routes/product/edit";
+import { Write } from "./Routes/product/write";
 
 const Body = styled.div`
   display: flex;
@@ -29,7 +30,8 @@ function App() {
             <Route path="/join" element={<Join />} />
             <Route path="/login" element={<Login />} />
             <Route path="/write" element={<Write />} />
-            <Route path="/:id" element={<Detail />} />
+            <Route path="/product/:id" element={<Detail />} />
+            <Route path="/product/:id/edit" element={<Edit />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>
